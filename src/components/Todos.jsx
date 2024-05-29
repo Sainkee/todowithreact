@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Table, Modal, Button } from "antd"; // Import Modal and Button from antd
-import { ArrowDown, ArrowUp, Plus } from "lucide-react";
+import { ArrowDown, ArrowUp, Home, Plus } from "lucide-react";
 import { TodoContext } from "../App";
 import Model from "./Model";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useNavigate } from "react-router-dom";
 
 const Todos = () => {
   const { state, dispatch } = useContext(TodoContext);
@@ -16,6 +17,7 @@ const Todos = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTodoId, setSelectedTodoId] = useState(null); // Track the ID of the todo for which reminder is being set
   const [sorting, setSorting] = useState("desc"); // Track sorting state
+  const navigate = useNavigate();
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => {
@@ -143,7 +145,9 @@ const Todos = () => {
         ),
     },
   ];
-
+  const handleGoHome = () => {
+    navigate("/");
+  };
   // Pagination configuration
   const pagination = {
     pageSize: pageSize,
@@ -161,19 +165,26 @@ const Todos = () => {
         <div
           className={`py-2 px-4 ${
             isDarkMode ? "bg-gray-800 text-white" : "bg-purple-600 text-white"
-          } md:text-center my-10 font-bold text-4xl  text-start `}
+          } md:text-center my-10 font-bold text-2xl md:4xl text-start `}
         >
           Todos
         </div>
+
         <button
           onClick={handleToggleDarkMode}
-          className="absolute top-2 right-20 flex items-center justify-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
+          className="absolute top-2 right-20 flex items-center justify-center px-4 py-2 text-gray-800 dark:text-gray-200  dark:hover:bg-gray-600 focus:outline-none"
         >
           {isDarkMode ? "Light" : "Dark"}
         </button>
+        <div
+            className="text-red text-2xl  md:3xl flex justify-center items-center  absolute top-4 right-40 cursor-pointer "
+            onClick={handleGoHome}
+          >
+            <Home size={20}/>
+          </div>
         <button
           onClick={handleSorting}
-          className="absolute top-2 right-4 flex items-center justify-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
+          className="absolute top-2 right-4 flex items-center justify-center px-4 py-2  text-gray-800 dark:text-gray-200 hover:bg-gray-800  focus:outline-none"
         >
           {sorting ? <ArrowUp /> : <ArrowDown />}
         </button>
