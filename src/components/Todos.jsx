@@ -91,7 +91,7 @@ const Todos = () => {
       key: "title",
     },
     {
-      title: "Completed",
+      title: "state",
       dataIndex: "completed",
       key: "completed",
       render: (completed) => (

@@ -25,7 +25,7 @@ export default function Intro() {
           src={backgroundImage}
           alt="Illustration related to todo management"
           style={{ transform: "scaleX(-1)" }}
-          className=" h-full w-full  -mt-16"
+          className=" h-full w-full  md:-mt-16"
         />
       </div>
     </div>
